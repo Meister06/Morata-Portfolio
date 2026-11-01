@@ -40,37 +40,115 @@ if (form) {
     });
 }
 
+
 const gallery = document.querySelector('.gallery');
 
 if (gallery) {
     gallery.addEventListener('click', event => {
+
+        // Open images
         if (event.target.tagName === 'IMG') {
             openLightbox(event.target);
         }
+
+        // Open videos
+        if (event.target.tagName === 'VIDEO') {
+            openLightbox(event.target);
+        }
+
     });
 }
 
-function openLightbox(image) {
+
+function openLightbox(media) {
+
     const lightbox = document.getElementById('lightbox');
+
     const lightboxImage = document.getElementById('lightbox-image');
 
-    if (lightbox && lightboxImage) {
-        lightboxImage.src = image.src;
-        lightboxImage.alt = image.alt;
-        lightbox.style.display = 'flex';
+    const lightboxVideo = document.getElementById('lightbox-video');
+
+
+    if (!lightbox || !lightboxImage || !lightboxVideo) {
+        return;
     }
+
+
+    // Reset previous media
+    lightboxImage.style.display = 'none';
+    lightboxVideo.style.display = 'none';
+
+    lightboxVideo.pause();
+    lightboxVideo.removeAttribute('src');
+    lightboxVideo.load();
+
+
+    // If clicked media is an image
+    if (media.tagName === 'IMG') {
+
+        lightboxImage.src = media.src;
+        lightboxImage.alt = media.alt;
+
+        lightboxImage.style.display = 'block';
+
+    }
+
+
+    // If clicked media is a video
+    else if (media.tagName === 'VIDEO') {
+
+        lightboxVideo.src = media.currentSrc || media.src;
+
+        lightboxVideo.style.display = 'block';
+
+        lightboxVideo.load();
+
+    }
+
+
+    lightbox.style.display = 'flex';
+
 }
 
+
 function closeLightbox() {
+
     const lightbox = document.getElementById('lightbox');
+
+    const lightboxImage = document.getElementById('lightbox-image');
+
+    const lightboxVideo = document.getElementById('lightbox-video');
+
 
     if (lightbox) {
         lightbox.style.display = 'none';
     }
+
+
+    if (lightboxImage) {
+        lightboxImage.src = '';
+    }
+
+
+    if (lightboxVideo) {
+
+        lightboxVideo.pause();
+
+        lightboxVideo.removeAttribute('src');
+
+        lightboxVideo.load();
+
+    }
+
 }
 
+
+// Close lightbox using Escape key
 document.addEventListener('keydown', event => {
+
     if (event.key === 'Escape') {
         closeLightbox();
     }
+
 });
+
