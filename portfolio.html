@@ -842,10 +842,30 @@
   </div>
   <script src="js/main.js">
   </script>
-  <div id="lightbox" onclick="closeLightbox()">
+  
+<!-- VIDEO AND IMAGE LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+
     <span class="close-button">&times;</span>
-    <img id="lightbox-image" src="" alt="">
-  </div>
+
+    <!-- Enlarged image -->
+    <img
+        id="lightbox-image"
+        src=""
+        alt=""
+        onclick="event.stopPropagation()"
+    >
+
+    <!-- Enlarged video -->
+    <video
+        id="lightbox-video"
+        controls
+        playsinline
+        onclick="event.stopPropagation()">
+    </video>
+
+</div>
+
  </body>
 </html>
 
