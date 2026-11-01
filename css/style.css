@@ -1361,3 +1361,31 @@ body {
     display: block;
     object-fit: cover;
 }
+
+/* Enlarged lightbox image */
+#lightbox-image {
+    max-width: 90%;
+    max-height: 85vh;
+    object-fit: contain;
+}
+
+/* Enlarged lightbox video */
+#lightbox-video {
+    display: none;
+    max-width: 90%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Lightbox close button */
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 10000;
+}
